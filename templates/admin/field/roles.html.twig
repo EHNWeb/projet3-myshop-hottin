@@ -1,0 +1,16 @@
+{% block _User_roles %}
+	{% for role in field.value %}
+		{% if role == 'ROLE_ADMIN' %}
+			Admin
+		{% elseif role == 'ROLE_USER' %}
+			Membre
+		{% elseif role == 'ROLE_USER_PRENIUM' %}
+			Membre Prenium
+        {% else %}
+            Membre VIP  
+		{% endif %}
+
+        {#  {{ role }} : permet d'afficher le role au format ROLE_XXXX #}
+	{% endfor %}
+
+{% endblock %}
