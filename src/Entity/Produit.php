@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @Vich\Uploadable
  */
 class Produit
 {
@@ -50,6 +54,11 @@ class Produit
     private $photo;
 
     /**
+     * @Vich\UploadableField(mapping="produits", fileNameProperty="image")
+     */
+    private $imageFile;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $prix;
@@ -65,9 +74,14 @@ class Produit
     private $date_enregistrement;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="id_produit")
-     */
+    * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="id_produit")
+    */
     private $commandes;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -144,7 +158,7 @@ class Produit
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
 
@@ -210,6 +224,37 @@ class Produit
         if ($this->commandes->removeElement($commande)) {
             $commande->removeIdProduit($this);
         }
+
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if($this->imageFile instanceof UploadedFile)
+        {
+            // Si on uplaod un fichier lors de l'édition de l'article, il faut forcer la soumission des fiomulaires
+            // en mettant à jour le champs updatedAt
+            $this->updatedAt = new \DateTime;
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
