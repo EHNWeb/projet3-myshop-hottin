@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 
 class MembreCrudController extends AbstractCrudController
 {
@@ -23,12 +24,12 @@ class MembreCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('pseudo', 'Pseudo'),
             TextField::new('password', 'Mot de passe'),
-            TextField::new('email', 'E-mail'),
+            EmailField::new('email', 'E-mail'),
             ChoiceField::new('civilite', 'Civilité')->setChoices([
                 'Monsieur' => 'm',
                 'Madame' => 'f',
                 'Mx' => 'x',
-        ]),
+            ]),
             TextField::new('nom', 'Nom'),
             TextField::new('prenom', 'Prenom'),
             CollectionField::new('roles', 'Roles')->setTemplatePath('admin/field/roles.html.twig'),
