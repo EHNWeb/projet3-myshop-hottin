@@ -36,14 +36,14 @@ class Commande
     private $quantite;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $etat;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $date_enregistrement;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $etat;
 
     public function __construct()
     {
@@ -103,18 +103,6 @@ class Commande
         return $this;
     }
 
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
-
     public function getDateEnregistrement(): ?\DateTimeInterface
     {
         return $this->date_enregistrement;
@@ -123,6 +111,18 @@ class Commande
     public function setDateEnregistrement(\DateTimeInterface $date_enregistrement): self
     {
         $this->date_enregistrement = $date_enregistrement;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }
