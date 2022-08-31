@@ -32,7 +32,7 @@ class DashboardController extends AbstractDashboardController
         return [
             MenuItem::linkToDashboard('Accueil', 'fa fa-home'),
             MenuItem::section('e-Boutique', 'fa fa-store'),
-            MenuItem::linkToCrud('Produits', 'fa fa-basket-shopping', Produit::class),
+            MenuItem::linkToCrud('Produits', 'fa fa-gifts', Produit::class),
             MenuItem::linkToCrud('Commandes', 'fa fa-cart-arrow-down', Commande::class),
             MenuItem::section('Utilisateurs', 'fa fa-users-line'),
             MenuItem::linkToCrud('Membres', 'fa fa-users', Membre::class),
