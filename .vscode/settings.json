@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MySQL",
+            "name": "Heroku MyShop",
+            "connectString": "mysql://m1rw78g2fy0u4n1i:d0ukhwvuizhjaqwu@clwxydcjair55xn0.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/vudqqpeus8k6uhle"
+        }
+    ]
+}

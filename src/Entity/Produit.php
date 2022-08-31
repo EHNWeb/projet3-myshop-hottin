@@ -24,11 +24,6 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $titre;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -83,6 +78,11 @@ class Produit
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $titre;
+
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -91,18 +91,6 @@ class Produit
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -255,6 +243,18 @@ class Produit
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
 
         return $this;
     }
