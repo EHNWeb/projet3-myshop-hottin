@@ -24,7 +24,14 @@
                     <img class="img-fluid" src="{{ asset('images/produits/' ~ produit.photo) }}" alt="{{ produit.titre }}">
                     {{ produit.description|raw }}
                     <br>
-                    <a href="#" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-shopping-plus"></i></a>
+                    {% if app.user %}
+                        <a href="#" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-plus"></i></a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-success">
+                            Pour commander <i class="fa-solid fa-cart-plus"></i><br>
+                            Connectez vous <i class="fa-solid fa-arrow-right-to-bracket"></i><br>
+                        </a>
+                    {% endif %}
                 </div>
             </article>
         {% endfor %}

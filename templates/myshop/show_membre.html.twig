@@ -1,55 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MyshopController!
-{% endblock %}
+{% block title %}MyShop - Profil{% endblock %}
 
 {% block body %}
-	<div class="text-center">
-		<section class="row article">
-			<article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
-				<div class="content">
-					<table class="table">
-                        <thead>
-                            <tr>
-                                <th colspan="2"><h2>Mon compte</h2></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pseudo:</td>
-                                <td>{{ app.user.pseudo }}</td>
-                            </tr>
-                            <tr>
-                                <td>Civilité:</td>
-                                <td>{{ app.user.civilite }}</td>
-                            </tr>
-                            <tr>
-                                <td>Nom:</td>
-                                <td>{{ app.user.nom }}</td>
-                            </tr>
-                            <tr>
-                                <td>Prénom:</td>
-                                <td>{{ app.user.prenom }}</td>
-                            </tr>
-                            <tr>
-                                <td>E-mail:</td>
-                                <td>{{ app.user.email }}</td>
-                            </tr>
-                            <tr>
-                                <td>Inscription:</td>
-                                <td>{{ app.user.DateEnregistrement|date("d M Y à H:m:s") }}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2">
-                                    <a href="#" class="btn btn-success">Modifier le profil&nbsp;<i class="fa-solid fa-pen"></i></a>
-                                </td>
-                            </tr>
-                        </tfoot>
-					</table>
-				</div>
-			</article>
-		</section>
-	</div>
+    {% if app.user is not null %}
+        <div class="text-center">
+            <section class="row article">
+                <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
+                    <div class="content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2"><h2>Mon compte</h2></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pseudo:</td>
+                                    <td>{{ app.user.pseudo }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Role(s):</td>
+                                    <td>
+                                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                                        Admin&nbsp;
+                                    {% endif %}
+                                    {%if 'ROLE_USER' in app.user.roles %}
+                                        Membre
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Civilité:</td>
+                                    <td>
+                                        {% if app.user.civilite == 'm' %}
+                                            Monsieur
+                                        {% elseif app.user.civilite == 'f' %}
+                                            Madame
+                                        {% else %}
+                                            Mixte
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nom:</td>
+                                    <td>{{ app.user.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom:</td>
+                                    <td>{{ app.user.prenom }}</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td>{{ app.user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Inscription:</td>
+                                    <td>{{ app.user.DateEnregistrement|date("d M Y à H:m:s") }}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="tfoot">
+                                <tr>
+                                    <td colspan="2">
+                                        <a href="{{ path('profil_edit', {id: app.user.id}) }}" class="btn btn-success">Modifier le profil&nbsp;<i class="fa-solid fa-pen"></i></a>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </div>
+    {% else %}
+        <br>
+        <br>
+        <div class="alert alert-danger text-center">
+            Il faut être connecté pour voir son profil !
+        </div>
+    {% endif %}
 {% endblock %}

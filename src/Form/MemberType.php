@@ -6,6 +6,7 @@ use App\Entity\Membre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class MemberType extends AbstractType
 {
@@ -13,13 +14,15 @@ class MemberType extends AbstractType
     {
         $builder
             ->add('pseudo')
-            ->add('roles')
-            ->add('password')
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('civilite')
-            ->add('date_enregistrement')
+            ->add('civilite', ChoiceType::class, array(
+                'choices' => array(
+                    'Monsieur' => 'm',
+                    'Madame' => 'f',
+                    'Mixte' => 'x')
+            ))
         ;
     }
 

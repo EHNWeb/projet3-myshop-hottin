@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyShop - Profil{% endblock %}
+
+{% block body %}
+    {% if app.user is not null %}
+        <div class="text-center">
+			{{ form_start(formMembre, {
+                attr: {
+                    novalidate: 'novalidate'
+                }
+                })
+            }}
+
+			<table class="table">
+				<tr>
+					<td class="fw-bold" colspan="3">
+						{{ form_label(formMembre.pseudo, 'Pseudo')}}
+					</td>
+					<td class="fw-bold" colspan="3">
+						{{ form_label(formMembre.email, 'E-mail')}}
+					</td>
+				</tr>
+				<tr>
+					<td class="bg-secondary bg-opacity-10">
+						&nbsp;<i class="fa-solid fa-user fa-2x"></i>&nbsp;
+					</td>
+					<td colspan="2">
+						{{ form_widget(formMembre.pseudo, {
+                            attr: {
+                                placeholder: "Votre pseudo"
+                                }
+                        }) }}
+					</td>
+					<td class="bg-secondary bg-opacity-10">
+						&nbsp;<i class="fa-solid fa-at fa-2x"></i>&nbsp;
+					</td>
+					<td colspan="2">
+						{{ form_widget(formMembre.email, {
+                            attr: {
+                                placeholder: "Votre e-mail"
+                                }
+                        }) }}
+					</td>
+				</tr>
+				<tr>
+					<td class="fw-bold" colspan="2">
+						{{ form_label(formMembre.civilite, 'Civilité')}}
+					</td>
+					<td class="fw-bold" colspan="2">
+						{{ form_label(formMembre.nom, 'Nom')}}
+					</td>
+					<td class="fw-bold" colspan="2">
+						{{ form_label(formMembre.prenom, 'Prenom')}}
+					</td>
+				</tr>
+				<tr>
+					<td class="bg-secondary bg-opacity-10">
+						&nbsp;<i class="fa-solid fa-person-half-dress fa-2x"></i>&nbsp;
+					</td>
+					<td>
+						{{ form_widget(formMembre.civilite) }}
+					</td>
+					<td class="bg-secondary bg-opacity-10">
+						&nbsp;<i class="fa-solid fa-pen fa-2x"></i>&nbsp;
+					</td>
+					<td>
+						{{ form_widget(formMembre.nom) }}
+					</td>
+					<td class="bg-secondary bg-opacity-10">
+						&nbsp;<i class="fa-solid fa-pen fa-2x"></i>&nbsp;
+					</td>
+					<td>
+						{{ form_widget(formMembre.prenom) }}
+					</td>
+				</tr>
+			</table>
+			<button type="submit" class="btn btn-primary mt-2">Modifier</button>
+
+			{{ form_end(formMembre) }}
+		</div>
+	{% else %}
+		<br>
+		<br>
+		<div class="alert alert-danger text-center">
+			Il faut être connecté pour éditer son profil !
+		</div>
+    {% endif %}
+{% endblock %}
