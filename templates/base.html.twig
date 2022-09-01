@@ -24,26 +24,26 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">MyShop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                        <a class="nav-link active" href="#">Home
-                            <span class="visually-hidden">(current)</span>
-                        </a>
+                            <a class="nav-link active" href="#">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="#">Features</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="#">Pricing</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Action</a>
                                 <a class="dropdown-item" href="#">Another action</a>
@@ -53,14 +53,38 @@
                             </div>
                         </li>
                     </ul>
-                    <a class="nav-link disabled">{{ "now"|date("m/d/Y H:i:s") }}</a>
                     <ul class="navbar-nav me-auto d-flex">
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}"><i class="fa-solid fa-user-plus"></i>&nbsp;S'inscrire</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;Se connecter</a>
-                        </li>
+						{% if app.user is not null %}
+                            <li class="nav-item">
+                                <a class="nav-link active">Bonjour {{ app.user.pseudo }} !</a>
+                            </li>
+							<li  class="nav-item">
+								{# <a class="nav-link" href="{{ path('app_profil') }}">Profil</a> #}
+                                <a class="nav-link" href="#"><i class="fa-solid fa-eye"></i>&nbsp;Mon compte</a>
+							</li>
+							<li class="nav-item">
+								{% if is_granted("ROLE_ADMIN") %}
+									<a class="nav-link" href="{{ path('admin') }}"><i class="fa-solid fa-chalkboard-user"></i>&nbsp;Back-Office</a>
+								{% else %}
+									<a class="nav-link"><i class="fa-solid fa-user"></i></a>
+								{% endif %}
+                            </li>
+							<li>
+								<a class="nav-link" href="{{ path('app_logout') }}" class="text-danger">
+									<i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Se déconnecter
+								</a>
+							</li>
+						{% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_register') }}"><i class="fa-solid fa-user-plus"></i>&nbsp;S'inscrire</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i>&nbsp;Se connecter</a>
+                            </li>
+						{% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link active"><i class="fa-solid fa-calendar-days"></i>&nbsp;{{ "now"|date("D, d M Y") }}</a>
+                            </li>
                     </ul>
                 </div>
             </div>
