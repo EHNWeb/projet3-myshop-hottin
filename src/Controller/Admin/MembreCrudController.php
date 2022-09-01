@@ -44,6 +44,7 @@ class MembreCrudController extends AbstractCrudController
             TextField::new('nom', 'Nom'),
             TextField::new('prenom', 'Prénom'),
             CollectionField::new('roles', 'Roles')->setTemplatePath('admin/field/roles.html.twig'),
+            DateTimeField::new('DateEnregistrement', "Date<br>Enregistrement")->setFormat("dd/MM/Y HH:mm:ss"),
         ];
     }
 
