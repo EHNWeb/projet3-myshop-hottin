@@ -3,18 +3,31 @@
 {% block title %}Hello MyshopController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div class="row">
+        <img src="{{ asset('images/banners/MyShop.jpg') }}" alt="Banner MyShop" class="img-fluid">
+		<div  class="card-img-overlay mt-5 text-center text-danger">
+        <br>
+		    <h4>Expédition à travers le monde 24h/24 et 7j/7</h4>
+        </div>
+	</div>
+    <div>
+        <h2 class="text-center">Nos {{ tabProduits|length }} produits en boutique</h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/erich/MEGA/Formation/Symphony/Projets/myshop/src/Controller/MyshopController.php'|file_link(0) }}">src/Controller/MyshopController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/erich/MEGA/Formation/Symphony/Projets/myshop/templates/myshop/index.html.twig'|file_link(0) }}">templates/myshop/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <section class="row articles">
+        {% for produit in tabProduits %}
+            <article class="col-md-3 mx-auto text-center mb-3 p-3 mt-3 mr-1">
+                <h2>{{ produit.titre }}</h2>
+                <div class="metadata">
+                    {{ produit.prix|number_format(2) }} €
+                </div>
+                <div class="content">
+                    <img class="img-fluid" src="{{ asset('images/produits/' ~ produit.photo) }}" alt="{{ produit.titre }}">
+                    {{ produit.description|raw }}
+                    <br>
+                    <a href="#" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-shopping-plus"></i></a>
+                </div>
+            </article>
+        {% endfor %}
+        </section>
+    </div>
 {% endblock %}

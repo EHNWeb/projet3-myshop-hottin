@@ -22,14 +22,14 @@
     	{# NAVBAR Bootstrap #}
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">MyShop</a>
+                <a class="navbar-brand">MyShop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Home
+                            <a class="nav-link active" href="{{ path('app_myshop') }}">Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
@@ -41,16 +41,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
-                            </div>
                         </li>
                     </ul>
                     <ul class="navbar-nav me-auto d-flex">
@@ -92,10 +82,53 @@
         <div class="container">
             {% block body %}{% endblock %}
         </div>
-        
+        <br><br>
+        <!-- Footer -->
+        <footer class=" text-center text-white" style="background-color:#e95420;">
+        <!-- Grid container -->
+        <div class="container p-4">
+
+            <!-- Section: Social media -->
+            <section class="mb-4">
+            <!-- Facebook -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+            <!-- Github -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+
+            <!-- Section: Text -->
+            <section class="mb-4">
+            <p>
+                Retrouvez nous sur les réseaux sociaux et bénéficier de promotions, de ventes privées ou de présentation en avant-premières.
+            </p>
+            </section>
+            <!-- Section: Text -->
+
+
+        </div>
+        <!-- Grid container -->
+
         <!-- Copyright -->
-        <div class="copyright text-center"><p><i class="fa-solid fa-copyright"></i> 2022 Copyright: HOTTIN Éric</p></div=>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <i class="fa-solid fa-copyright"></i> 2022 Copyright: HOTTIN Éric
+        </div>
         <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
 
 		{# Font Awesomw#}
 		<script src="https://kit.fontawesome.com/032b0d3637.js" crossorigin="anonymous"></script>
