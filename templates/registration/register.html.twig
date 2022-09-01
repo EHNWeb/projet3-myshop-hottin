@@ -1,9 +1,103 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="text-center">
+    <h1>Complétez le formulaire d'inscription</h1>
+
+    {{ form_start(registrationForm) }}
+
+        <table class="table">
+            <tr>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.pseudo, 'Pseudo')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.plainPassword, 'Mot de passe')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.email, 'E-mail')}}
+                </td>
+            </tr>
+            <tr>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-user fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.pseudo, {
+                        attr: {
+                            placeholder: "Votre pseudo"
+                            }
+                    }) }}
+                </td>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-key fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.plainPassword, {
+                        attr: {
+                            placeholder: "Votre mot de passe"
+                            }
+                    }) }}
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-at fa-2x"></i>&nbsp;
+                </td>
+                <td colspan="2">
+                    {{ form_widget(registrationForm.email, {
+                        attr: {
+                            placeholder: "Votre e-mail"
+                            }
+                    }) }}
+                </td>
+            </tr>
+            <tr>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.civilite, 'Civilité')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.nom, 'Nom')}}
+                </td>
+                <td class="fw-bold" colspan="2">
+                    {{ form_label(registrationForm.prenom, 'Prénom')}}
+                </td>
+            </tr>
+            <tr>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-person-half-dress fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.civilite) }}
+                </td>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-pen fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.nom, {
+                        attr: {
+                            placeholder: "Votre nom"
+                            }
+                    }) }}
+                </td>
+                <td class="bg-secondary bg-opacity-10">
+                    &nbsp;<i class="fa-solid fa-pen fa-2x"></i>&nbsp;
+                </td>
+                <td>
+                    {{ form_widget(registrationForm.prenom, {
+                        attr: {
+                            placeholder: "Votre prénom"
+                            }
+                    }) }}
+                </td>
+            </tr>
+        </table>
+        </div>
+
+        {{form_row(registrationForm.agreeTerms)}}
+        <button type="submit" class="btn btn-primary mt-2">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</div>
+    {# <h1>Register</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.pseudo) }}
@@ -13,5 +107,5 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 {% endblock %}

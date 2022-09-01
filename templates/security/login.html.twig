@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connection !{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,19 +10,56 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous êtes connecté en tant que: <span class="fw-bold">{{ app.user.userIdentifier }}</span>, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputPseudo">Pseudo</label>
-    <input type="text" value="{{ last_username }}" name="pseudo" id="inputPseudo" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <h1 class="h3 mb-3 font-weight-normal">Identifiez vous</h1>
+    <table class="table">
+        <tr>
+            <td class="fw-bold" colspan="2">
+                <label for="inputPseudo">Pseudo</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-secondary bg-opacity-10 text-center">
+                &nbsp;<i class="fa-solid fa-user fa-2x"></i>&nbsp;
+            </td>
+            <td>
+                <input
+                    type="text"
+                    value="{{ last_username }}"
+                    name="pseudo" id="inputPseudo"
+                    class="form-control"
+                    autocomplete="username"
+                    required
+                    autofocus
+                    placeholder="Votre pseudo"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td class="fw-bold" colspan="2">
+                <label for="inputPassword">Mot de passe</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="bg-secondary bg-opacity-10 text-center">
+                &nbsp;<i class="fa-solid fa-key fa-2x"></i>&nbsp;
+            </td>
+            <td>
+                <input
+                    type="password" 
+                    name="password" 
+                    id="inputPassword" 
+                    class="form-control" 
+                    autocomplete="current-password" 
+                    required
+                    placeholder="Votre mot de passe"
+                >
+            </td>
+        </tr>
+    </table>
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -35,8 +72,12 @@
         </div>
     #}
 
+    <input type="hidden" name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}"
+    >
+
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Se connecter
     </button>
 </form>
 {% endblock %}

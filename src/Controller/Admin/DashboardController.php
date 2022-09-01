@@ -24,13 +24,13 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Myshop');
+            ->setTitle('MyShop');
     }
 
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::linkToDashboard('Accueil', 'fa fa-home'),
+            MenuItem::linkToDashboard('Admin', 'fa fa-gear'),
             MenuItem::section('e-Boutique', 'fa fa-store'),
             MenuItem::linkToCrud('Produits', 'fa fa-gifts', Produit::class),
             MenuItem::linkToCrud('Commandes', 'fa fa-cart-arrow-down', Commande::class),
