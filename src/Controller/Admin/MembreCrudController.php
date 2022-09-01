@@ -42,7 +42,7 @@ class MembreCrudController extends AbstractCrudController
                 'Mx' => 'x',
             ]),
             TextField::new('nom', 'Nom'),
-            TextField::new('prenom', 'Prenom'),
+            TextField::new('prenom', 'Prénom'),
             CollectionField::new('roles', 'Roles')->setTemplatePath('admin/field/roles.html.twig'),
         ];
     }
