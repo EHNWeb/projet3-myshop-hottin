@@ -49,8 +49,7 @@
                                 <a class="nav-link active">Bonjour {{ app.user.pseudo }} !</a>
                             </li>
 							<li  class="nav-item">
-								{# <a class="nav-link" href="{{ path('app_profil') }}">Profil</a> #}
-                                <a class="nav-link" href="#"><i class="fa-solid fa-eye"></i>&nbsp;Mon compte</a>
+								<a class="nav-link" href="{{ path('profil_show') }}"><i class="fa-solid fa-eye"></i>&nbsp;Profil</a>
 							</li>
 							<li class="nav-item">
 								{% if is_granted("ROLE_ADMIN") %}

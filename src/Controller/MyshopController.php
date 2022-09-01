@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MembreRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,5 +23,13 @@ class MyshopController extends AbstractController
         return $this->render('myshop/index.html.twig', [
             'tabProduits' => $produits
         ]);
+    }
+
+    /**
+     * @Route("/profil_show", name="profil_show")
+     */
+    public function show_membre(): Response
+    {
+        return $this->render('myshop/show_membre.html.twig'); 
     }
 }
