@@ -27,7 +27,7 @@
 					<th>Prix (€)</th>
 					<th colspan="3">Quantité</th>
 					<th>Prix (€)</th>
-					<th>&nbsp;</th>
+					<th colspan="2">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,7 +48,25 @@
 						</td>
 						<td class="align-middle">{{ (item.produit.prix * item.quantite)|number_format(2) }}</td>
 						<td class="align-middle">
-							<a href="{{ path('cart_remove', {id: item.produit.id}) }}" class="btn-danger">
+                            <a href="#" onclick="getElementById('windowsProduit{{ item.produit.id }}').style.display='';" class="text-info"><i class="fa-solid fa-eye"></i></a>
+                            
+                            <div style="background:white;
+                                        border: solid 1px black;
+                                        width:550px;
+                                        height:550px;
+                                        position:absolute;
+                                        top:0;
+                                        left:0;
+                                        right:0;
+                                        bottom:0;
+                                        margin: auto;
+                                        display:none;"
+                                 id="windowsProduit{{ item.produit.id }}">
+                                {% include('/myshop/show_produit.html.twig') %}
+                            </div>
+						</td>
+                        <td class="align-middle">
+							<a href="{{ path('cart_remove', {id: item.produit.id}) }}" class="text-danger">
 								<i class="fa-solid fa-trash-can"></i>
 							</a>
 						</td>
@@ -62,7 +80,7 @@
 						{{ app.session.get('totalQuantity') }}
 						article(s)</td>
 					<td>{{ totalPanier|number_format(2) }}</td>
-					<td></td>
+					<td colspan="2"></td>
 				</tr>
 			</tfoot>
         </table>

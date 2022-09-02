@@ -1,0 +1,29 @@
+<section class="row article">
+    <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
+        <h2>{{ item.produit.titre }}</h2>
+        <div class="content">
+            <span class="fw-bold">Id:</span> {{ item.produit.id }}&nbsp;-&nbsp;<span class="fw-bold">Prix:</span> {{ item.produit.prix|number_format(2) }} €
+            <br>
+            <span class="fw-bold">Couleur:</span> {{ item.produit.couleur|capitalize }}
+            &nbsp;-&nbsp;
+            <span class="fw-bold">Collection:</span> 
+            {% if item.produit.collection == 'f' %}
+                Femme
+            {% elseif  item.produit.collection == 'm' %}
+                Homme
+            {% else %}
+                    Mixte
+            {% endif %}
+            &nbsp;-&nbsp;
+            <span class="fw-bold">Taille:</span> {{ item.produit.taille|upper }}
+            <br>
+            <img width="200px" height="200px" src="{{ asset('images/produits/' ~ item.produit.photo) }}" alt="{{ item.produit.titre }}">
+            <br>
+            {{ item.produit.description|raw }}
+            <br>
+            <a href="#" onclick="getElementById('windowsProduit{{ item.produit.id }}').style.display='none'" class="btn btn-sm btn-dark">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+        </div>
+    </article>
+</section>
