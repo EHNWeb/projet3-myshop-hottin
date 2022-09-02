@@ -50,7 +50,7 @@
                         {% set totalCart = app.session.get('totalPanier') %}
                         {# On affiche la quantité sous forme de badge  #}
                         {% if totalCart > 0 %}
-                            <li><h6><span class="badge rounded-pill bg-success">{{ totalCart }} €</span></h6></li>
+                            <li><h6><span class="badge rounded-pill bg-success">{{ totalCart|number_format(2) }} €</span></h6></li>
                         {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_order') }}">Mes commandes&nbsp;<i class="fa-solid fa-cart-shopping"></i></a>

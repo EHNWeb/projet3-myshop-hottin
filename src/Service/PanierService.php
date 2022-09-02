@@ -119,4 +119,9 @@ class PanierService {
 
         return $totalPanier;
     }
+
+    public function passOrder()
+    {
+        
+    }
 }

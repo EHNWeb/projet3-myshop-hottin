@@ -80,4 +80,14 @@ class PanierController extends AbstractController
             'totalPanier' => $totalPanier,
         ]);
     }
+
+     /**
+     * @Route("/cart/buy", name="cart_buy")
+     */
+    public function buy(PanierService $cs): Response
+    {
+       $cs->passOrder();
+
+       return $this->redirectToRoute('app_order');
+    }
 }
