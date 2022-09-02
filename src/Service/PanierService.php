@@ -92,8 +92,8 @@ class PanierService {
         foreach ($cart as $id => $quantity) {
             // On créer une nouvelle case dans le tableau $cartWithData
             $cartWithData[] = [
-                'product' => $this->repo->find($id),
-                'quantity' => $quantity
+                'produit' => $this->repo->find($id),
+                'quantite' => $quantity
             ];
             $quantityPanier += $quantity;
         }
@@ -111,7 +111,7 @@ class PanierService {
         // Pour chaque produit dans mon panier, j erécupère le sous total
         $totalPanier = 0;
         foreach ($cartWithData as $item) {
-            $totalItem = $item['product']->getPrice() * $item['quantity'];
+            $totalItem = $item['produit']->getPrix() * $item['quantite'];
             $totalPanier += $totalItem;
         }
 

@@ -25,10 +25,10 @@
                     {{ produit.description|raw }}
                     <br>
                     {% if app.user %}
-                        <a href="#" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-plus"></i></a>
+                        <a href="{{ path('cart_add', {id: produit.id }) }}" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-plus"></i></a>
                     {% else %}
                         <a href="{{ path('app_login') }}" class="btn btn-success">
-                            Pour commander <i class="fa-solid fa-cart-plus"></i><br>
+                            Pour commander <i class="fa-solid fa-basket-shopping"></i><br>
                             Connectez vous <i class="fa-solid fa-arrow-right-to-bracket"></i><br>
                         </a>
                     {% endif %}

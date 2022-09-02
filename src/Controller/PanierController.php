@@ -19,7 +19,7 @@ class PanierController extends AbstractController
         $cartWithData = $cs->getCartWithData();
         $totalPanier = $cs->getTotalPanier();
 
-        return $this->render('cart/index.html.twig', [
+        return $this->render('myshop/show_panier.html.twig', [
             'items' => $cartWithData,
             'totalPanier' => $totalPanier,
         ]);
@@ -59,10 +59,25 @@ class PanierController extends AbstractController
     /**
      * @Route("/cart/delete", name="cart_delete")
      */
-     public function delete(PanierService $cs): Response
-     {
-        $cs->empty();
+    public function delete(PanierService $cs): Response
+    {
+       $cs->empty();
 
-        return $this->redirectToRoute('app_cart');
-     }
+       return $this->redirectToRoute('app_cart');
+    }
+
+    /**
+     * @Route("/order", name="app_order")
+     */
+    public function order(PanierService $cs): Response
+    {
+
+        $cartWithData = $cs->getCartWithData();
+        $totalPanier = $cs->getTotalPanier();
+
+        return $this->render('myshop/show_order.html.twig', [
+            'items' => $cartWithData,
+            'totalPanier' => $totalPanier,
+        ]);
+    }
 }

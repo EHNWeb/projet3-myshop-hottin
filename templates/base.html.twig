@@ -37,28 +37,23 @@
                         {% endif %}
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Panier&nbsp;<i class="fa-solid fa-cart-shopping"></i></a>
+                            <a class="nav-link" href="{{ path('app_cart') }}">Panier&nbsp;<i class="fa-solid fa-basket-shopping"></i></a>
                         </li>
-                        <li><h6><span class="badge rounded-pill bg-danger">125</span></h6></li>
-
                         {% set nbProducts = app.session.get('totalQuantity') %}
                         {% if nbProducts > 0 %}
                             <li><h6><span class="badge rounded-pill bg-danger">{{ nbProducts }}</span></h6></li>
                         {% endif %}
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fa-solid fa-coins"></i></a>
                         </li>
-                        <li><h6><span class="badge rounded-pill bg-success">125,45 €</span></h6></li>
-
                         {% set totalCart = app.session.get('totalPanier') %}
                         {# On affiche la quantité sous forme de badge  #}
                         {% if totalCart > 0 %}
                             <li><h6><span class="badge rounded-pill bg-success">{{ totalCart }} €</span></h6></li>
                         {% endif %}
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="{{ path('app_order') }}">Mes commandes&nbsp;<i class="fa-solid fa-cart-shopping"></i></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav me-auto d-flex">

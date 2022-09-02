@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyShop - Panier{% endblock %}
+
+{% block body %}
+    {% if app.user is not null %}
+        <div class="text-center">
+            <section class="row article">
+                <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
+                    <div class="content">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2"><h2>Mes commandes</h2></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pseudo:</td>
+                                    <td>{{ app.user.pseudo }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Role(s):</td>
+                                    <td>
+                                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                                        Admin&nbsp;
+                                    {% endif %}
+                                    {%if 'ROLE_USER' in app.user.roles %}
+                                        Membre
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Civilité:</td>
+                                    <td>
+                                        {% if app.user.civilite == 'm' %}
+                                            Monsieur
+                                        {% elseif app.user.civilite == 'f' %}
+                                            Madame
+                                        {% else %}
+                                            Mixte
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Nom:</td>
+                                    <td>{{ app.user.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prénom:</td>
+                                    <td>{{ app.user.prenom }}</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td>{{ app.user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Inscription:</td>
+                                    <td>{{ app.user.DateEnregistrement|date("d M Y à H:m:s") }}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="tfoot">
+                                <tr>
+                                    <td colspan="2">
+                                        <a href="#" class="btn btn-success">
+                                            Passez commande&nbsp;
+                                            <i class="fa-solid fa-basket-shopping"></i>&nbsp;
+                                            <i class="fa-solid fa-arrow-right"></i>&nbsp;
+                                            <i class="fa-solid fa-cash-register"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </div>
+    {% else %}
+        <br>
+        <br>
+        <div class="alert alert-danger text-center">
+            Il faut être connecté pour voir ses commandes !
+        </div>
+    {% endif %}
+{% endblock %}
