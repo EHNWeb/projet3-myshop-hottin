@@ -4,83 +4,77 @@
 
 {% block body %}
     {% if app.user is not null %}
-        <div class="text-center">
-            <section class="row article">
-                <article class="mx-auto text-center mb-3 p-3 mt-3 mr-1">
-                    <div class="content">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th colspan="2"><h2>Mes commandes</h2></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Pseudo:</td>
-                                    <td>{{ app.user.pseudo }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Role(s):</td>
-                                    <td>
-                                    {% if 'ROLE_ADMIN' in app.user.roles %}
-                                        Admin&nbsp;
-                                    {% endif %}
-                                    {%if 'ROLE_USER' in app.user.roles %}
-                                        Membre
-                                    {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Civilité:</td>
-                                    <td>
-                                        {% if app.user.civilite == 'm' %}
-                                            Monsieur
-                                        {% elseif app.user.civilite == 'f' %}
-                                            Madame
-                                        {% else %}
-                                            Mixte
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Nom:</td>
-                                    <td>{{ app.user.nom }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Prénom:</td>
-                                    <td>{{ app.user.prenom }}</td>
-                                </tr>
-                                <tr>
-                                    <td>E-mail:</td>
-                                    <td>{{ app.user.email }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Inscription:</td>
-                                    <td>{{ app.user.DateEnregistrement|date("d M Y à H:m:s") }}</td>
-                                </tr>
-                            </tbody>
-                            <tfoot class="tfoot">
-                                <tr>
-                                    <td colspan="2">
-                                        <a href="{{ path('cart_buy', {id: app.user.id}) }}" class="btn btn-success">
-                                            Passez commande&nbsp;
-                                            <i class="fa-solid fa-basket-shopping"></i>&nbsp;
-                                            <i class="fa-solid fa-arrow-right"></i>&nbsp;
-                                            <i class="fa-solid fa-cash-register"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </article>
-            </section>
-        </div>
+        <h1 class="text-center">Vos commandes</h1>
+        
+        {% set commandes = app.user.commandes|sort|reverse %}
+
+        {# On test si le panier est vide #}
+        {% if commandes %}
+
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>Id Cde</th>
+                        <th>Id Produit</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Couleur</th>
+                        <th>Taille</th>
+                        <th>Collection</th>
+                        <th>Photo</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th>État</th>
+                        <th>Date commande</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for commande in commandes %}
+                    <tr>
+                        <td class="align-middle">{{ commande.id }}</td>
+                    {% for produit in commande.IdProduit %}
+                        <td class="align-middle">{{ produit.id }}</td>
+                        <td class="align-middle">{{ produit.titre}}</td>
+                        <td class="align-middle">{{ produit.description|raw}}</td>
+                        <td class="align-middle">{{ produit.couleur|capitalize }}</td>
+                        <td class="align-middle">{{ produit.taille|upper}}</td>
+                        <td class="align-middle">
+                        {% if produit.collection == 'f' %}
+                            Femme
+                        {% elseif  produit.collection == 'm' %}
+                            Homme
+                        {% else %}
+                            Mixte
+                        {% endif %}
+                        </td>
+                        <td class="align-middle">
+                            <img src="{{ asset('images/produits/' ~ produit.photo ) }}" alt="produit.titre" class="img-fluid" width="100px" height="100px">
+                        </td>
+                    {% endfor %}
+                        <td class="align-middle">{{ commande.quantite }}</td>
+                        <td class="align-middle">{{ commande.montant|number_format(2) }}</td>
+                        <td class="align-middle">
+                        {% if commande.etat == 0 %}
+                            En traitement
+                        {% elseif  commande.etat == 1 %}
+                            Envoyée
+                        {% else %}
+                            Livrée
+                        {% endif %}
+                        </td>
+                        <td class="align-middle">{{ commande.DateEnregistrement|date("d M Y à H:m:s") }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-center">Vous n'avez pas passer de commandes !</p>
+        {% endif %}
     {% else %}
         <br>
         <br>
         <div class="alert alert-danger text-center">
-            Il faut être connecté pour voir ses commandes !
+            Il faut être connecté pour voir son panier !
         </div>
     {% endif %}
 {% endblock %}

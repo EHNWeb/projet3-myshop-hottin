@@ -25,6 +25,7 @@ class PanierService {
     public function add($id){
         // On va créer une SESSION grâce à la classe RequestStack
         $session = $this->rs->getSession();
+        $stock = $this->repo->find($id)->getStock();
 
         // On récupère l'attribut de SESSION cart s'il existe, sinon , on récupère un tableau vide
         $cart = $session->get('cart', []);
@@ -32,7 +33,9 @@ class PanierService {
 
         // Si le produit existe déjà dans le panier, on incrémente la quantité
         if (!empty($cart[$id])) {
-            $cart[$id]++;
+            if ($cart[$id] < $stock) {
+                $cart[$id]++;
+            }
         } else {
             // l'index du tableau cart est l'id du produit
             $cart[$id] = 1;
@@ -143,6 +146,10 @@ class PanierService {
             $cdeProduitID = $item['produit'];
             $cdeProduitQTY = $item['quantite'];
             $cdeMontant = $item['produit']->getPrix() * $item['quantite'];
+
+            $produitToUpdate = $this->repo->find($cdeProduitID);
+            $produitToUpdate->setStock($produitToUpdate->getStock() - $item['quantite']);
+            $this->manager->persist($produitToUpdate);
 
             $commande = new Commande();
             

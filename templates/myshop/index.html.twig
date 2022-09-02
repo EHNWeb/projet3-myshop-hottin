@@ -24,13 +24,20 @@
                     <img class="img-fluid" src="{{ asset('images/produits/' ~ produit.photo) }}" alt="{{ produit.titre }}">
                     {{ produit.description|raw }}
                     <br>
-                    {% if app.user %}
-                        <a href="{{ path('cart_add', {id: produit.id }) }}" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-plus"></i></a>
-                    {% else %}
-                        <a href="{{ path('app_login') }}" class="btn btn-success">
-                            Pour commander <i class="fa-solid fa-basket-shopping"></i><br>
-                            Connectez vous <i class="fa-solid fa-arrow-right-to-bracket"></i><br>
+                    {% if produit.stock == 0  %}
+                        <a href="#" class="btn btn-danger">
+                            Indisponible<br>
+                            temporairement<br>
                         </a>
+                    {% else %}
+                        {% if app.user %}
+                            <a href="{{ path('cart_add', {id: produit.id }) }}" class="btn btn-success">Ajouter au panier&nbsp;<i class="fa-solid fa-cart-plus"></i></a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="btn btn-success">
+                                Pour commander <i class="fa-solid fa-basket-shopping"></i><br>
+                                Connectez vous <i class="fa-solid fa-arrow-right-to-bracket"></i><br>
+                            </a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </article>
