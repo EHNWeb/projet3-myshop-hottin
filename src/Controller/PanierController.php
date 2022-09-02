@@ -88,6 +88,8 @@ class PanierController extends AbstractController
     {
        $cs->passOrder($id);
 
+       $cs->empty();
+
        return $this->redirectToRoute('app_order');
     }
 }

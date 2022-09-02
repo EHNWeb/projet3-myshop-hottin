@@ -142,6 +142,7 @@ class PanierService {
 
             $cdeProduitID = $item['produit'];
             $cdeProduitQTY = $item['quantite'];
+            $cdeMontant = $item['produit']->getPrix() * $item['quantite'];
 
             $commande = new Commande();
             
@@ -149,6 +150,7 @@ class PanierService {
                      ->setEtat($cdeEtat)
                      ->setDateEnregistrement($cdeDateEnregistrement)
                      ->setQuantite($cdeProduitQTY)
+                     ->setMontant($cdeMontant)
                      ->addIdProduit($cdeProduitID);
 
             $this->manager->persist($commande);

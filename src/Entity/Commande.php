@@ -45,6 +45,11 @@ class Commande
      */
     private $etat;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $montant;
+
     public function __construct()
     {
         $this->id_produit = new ArrayCollection();
@@ -123,6 +128,18 @@ class Commande
     public function setEtat(int $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getMontant(): ?float
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(float $montant): self
+    {
+        $this->montant = $montant;
 
         return $this;
     }
