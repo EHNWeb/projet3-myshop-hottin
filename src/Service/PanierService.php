@@ -1,7 +1,11 @@
 <?php
 namespace App\Service;
 
+use App\Entity\Commande;
+use App\Repository\CommandeRepository;
+use App\Repository\MembreRepository;
 use App\Repository\ProduitRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -9,10 +13,13 @@ class PanierService {
     private $rs;
     private $repo;
 
-    public function __construct(RequestStack $rs, ProduitRepository $repo) {
+    public function __construct(RequestStack $rs, ProduitRepository $repo, CommandeRepository $repoCde, MembreRepository $repoMembre, EntityManagerInterface $manager) {
         // Hors d'un controller, nous devons faire les injections de dépendances dans un constructeur
         $this->rs = $rs;
         $this->repo = $repo;
+        $this->repoCde = $repoCde;
+        $this->repoMembre = $repoMembre;
+        $this->manager = $manager;
     }
 
     public function add($id){
@@ -120,8 +127,33 @@ class PanierService {
         return $totalPanier;
     }
 
-    public function passOrder()
+    public function passOrder($id)
     {
-        
+        $session = $this->rs->getSession();
+        $cartWithData = $this->getCartWithData();
+
+        $messageBDD = "La commande a bien été enregistrée.";
+        $cdeDateEnregistrement = new \DateTime();
+        $cdeEtat = 0;
+        $cdeMembreID = $this->repoMembre->find($id);
+
+        // Pour chaque produit dans mon panier, j erécupère le sous total
+        foreach ($cartWithData as $item) {
+
+            $cdeProduitID = $item['produit'];
+            $cdeProduitQTY = $item['quantite'];
+
+            $commande = new Commande();
+            
+            $commande->setIdMembre($cdeMembreID)
+                     ->setEtat($cdeEtat)
+                     ->setDateEnregistrement($cdeDateEnregistrement)
+                     ->setQuantite($cdeProduitQTY)
+                     ->addIdProduit($cdeProduitID);
+
+            $this->manager->persist($commande);
+            $this->manager->flush();
+        }
+
     }
 }

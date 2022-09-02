@@ -11,7 +11,7 @@
 
         <div class="text-center">
             <a href="{{ path('cart_delete') }}" class="btn btn-danger">Vider la panier <i class="fa-solid fa-trash-can"></i></a>
-            <a href="{{ path('cart_buy') }}" class="btn btn-success">
+            <a href="{{ path('cart_buy', {id: app.user.id}) }}" class="btn btn-success">
                 Passez commande&nbsp;
                 <i class="fa-solid fa-basket-shopping"></i>&nbsp;
                 <i class="fa-solid fa-arrow-right"></i>&nbsp;

@@ -82,11 +82,11 @@ class PanierController extends AbstractController
     }
 
      /**
-     * @Route("/cart/buy", name="cart_buy")
+     * @Route("/cart/buy/{id}", name="cart_buy")
      */
-    public function buy(PanierService $cs): Response
+    public function buy($id, PanierService $cs): Response
     {
-       $cs->passOrder();
+       $cs->passOrder($id);
 
        return $this->redirectToRoute('app_order');
     }
